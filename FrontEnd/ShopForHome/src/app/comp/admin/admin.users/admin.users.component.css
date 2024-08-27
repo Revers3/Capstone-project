@@ -1,0 +1,19 @@
+.raised{
+    margin-bottom: 50px;
+}
+
+/* Styles for the button row container */
+.button-row {
+  display: flex;
+  justify-content: right; /* Center the buttons horizontally */
+  gap: 8px; /* Space between buttons */
+  padding: 10px; /* Padding around the button row */
+}
+
+
+.button-row button {
+  margin: 0;
+  padding: 4px 8px; /* Adjust padding to your needs */
+  border-radius: 4px; /* Rounded corners, if desired */
+  font-size: 12px; 
+}

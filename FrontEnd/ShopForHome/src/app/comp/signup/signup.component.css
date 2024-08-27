@@ -1,0 +1,13 @@
+.signup-card {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.login {
+float: right;
+}

@@ -1,0 +1,118 @@
+<span>
+  <h3 style="padding-top: 20px;"> ShopForHome Admin Page - Product Management</h3>
+</span>
+<mat-toolbar color="primary">
+  
+  <div class="button-row">
+    <!--<button mat-button (click)="goToOrders()">Manage Orders</button> -->
+    
+    <button mat-button (click)="goToUsers()">Manage Users</button>
+    <button mat-button (click)="goToProducts()">Manage Products</button>
+    <button mat-button (click)="goToDiscounts()">Manage Discounts</button>
+    <button mat-button (click)="goToReport()">Sales Report</button>
+    <button mat-button color="warn" (click)="logout()">Logout</button>
+
+  </div>
+</mat-toolbar>
+
+
+<button mat-raised-button color="primary" (click)="toggleForm()" className="raised">
+  {{ isFormVisible ? 'Hide Form' : 'Show Form' }}
+</button>
+<div class="prod-creation-form" *ngIf="isFormVisible">
+  <form (ngSubmit)="addProd()">
+    <mat-form-field appearance="fill">
+      <mat-label>ID</mat-label>
+      <input matInput [(ngModel)]="newProd.id" name="id" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="newProd.name" name="name" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <input matInput [(ngModel)]="newProd.category" name="category" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput [(ngModel)]="newProd.price" name="price" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Stock</mat-label>
+      <input matInput [(ngModel)]="newProd.stock" name="stock" required>
+    </mat-form-field>
+    
+    <!-- File input field -->
+    
+      <mat-label>Image</mat-label>
+      <input type="file" (change)="onFileSelected($event)" accept="*/*" />
+
+    <!-- Upload button <button mat-raised-button color="primary" (click)="fileInput.click()">Choose File</button>-->
+    
+
+    <!-- Hidden file input -->
+    <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;" />
+    
+
+
+    <button mat-raised-button color="primary" type="submit">Add Product</button>
+
+  </form>
+</div>
+
+<mat-form-field appearance="fill">
+  <mat-label>Search by product name</mat-label>
+  <input matInput (input)="applyFilter($event)" placeholder="Type to search">
+</mat-form-field>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+      <td mat-cell *matCellDef="let prod">{{ prod.id }}</td>
+    </ng-container>
+
+    <!-- Image Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Image</th>
+      <td mat-cell *matCellDef="let prod"><img [src]="prod.image" alt="{{ prod.name }}" style="max-width: 100px; max-height: 100px;"/></td>
+    </ng-container>
+
+    <!-- name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let prod">{{ prod.name }}</td>
+    </ng-container>
+
+    <!-- category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+      <td mat-cell *matCellDef="let prod">{{ prod.category }}</td>
+    </ng-container>
+
+    <!-- price Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Price</th>
+      <td mat-cell *matCellDef="let prod">{{ prod.price }}</td>
+    </ng-container>
+
+    <!-- stock Column -->
+    <ng-container matColumnDef="stock">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Stock</th>
+      <td mat-cell *matCellDef="let prod">{{ prod.stock }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let prod">
+        <button mat-button (click)="editProd(prod)">Edit</button>
+        <button mat-button color="warn" (click)="deleteProd(prod, prod.id)">Delete</button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

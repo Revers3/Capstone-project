@@ -1,0 +1,76 @@
+<mat-toolbar color="primary">
+    <span>
+      <h3> ShopForHome - Your Cart</h3>
+    </span>
+    <div class="button-row">
+      <button mat-button (click)="goToCart()">Cart</button>
+      <button mat-button (click)="goToProducts()">Products</button>
+      <button mat-button (click)="goToOrders()">Orders</button>
+      <button mat-button (click)="goToWishlists()">Wishlist</button>
+      <button mat-button color="warn" (click)="logout()">Logout</button>
+    </div>
+  </mat-toolbar>
+  <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+    <button mat-flat-button (click)="orderItems()">Order Items</button>
+  </div>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.data.length > 0">
+    <!-- Image Column -->
+    <ng-container matColumnDef="image">
+      <th mat-header-cell *matHeaderCellDef> Image </th>
+      <td mat-cell *matCellDef="let element"> <img [src]="element.cart.product.image" alt="{{ element.cart.product.name }}" style="max-width: 100px; max-height: 100px;"/> </td>
+    </ng-container>
+  
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.cart.product.name}} </td>
+    </ng-container>
+  
+    <!-- Category Column -->
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef> Category </th>
+      <td mat-cell *matCellDef="let element"> {{element.cart.product.category}} </td>
+    </ng-container>
+  
+   
+    <!-- Stock Column -->
+    <ng-container matColumnDef="stock">
+      <th mat-header-cell *matHeaderCellDef> Stock </th>
+      <td mat-cell *matCellDef="let element"> {{ element.cart.product.stock }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let element">
+        <button (click)="decreaseQuantity(element)" [disabled]="element.quantity <= 1">-</button>
+        {{ element.quantity }}
+        <button (click)="increaseQuantity(element)" [disabled]="element.quantity >= element.cart.product.stock">+</button>
+      </td>
+    </ng-container>
+  
+    <!-- Discount Column -->
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef> Discount </th>
+      <td mat-cell *matCellDef="let element"> {{element.discount * 100}}% </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total">
+      <th mat-header-cell *matHeaderCellDef> Total </th>
+      <td mat-cell *matCellDef="let element">
+        {{ getTotalPrice(element) | currency }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button color="warn" (click)="deleteCart(element)">Remove</button>
+      </td>
+    </ng-container>
+  
+    
+  
+    <!-- Header and Row definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

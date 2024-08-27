@@ -1,0 +1,29 @@
+<span>
+  <h3 style="padding-top: 20px;"> ShopForHome Admin Page - Sales</h3>
+</span>
+<mat-toolbar color="primary">
+  
+  <div class="button-row">
+    <!--<button mat-button (click)="goToOrders()">Manage Orders</button> -->
+    
+    <button mat-button (click)="goToUsers()">Manage Users</button>
+    <button mat-button (click)="goToProducts()">Manage Products</button>
+    <button mat-button (click)="goToDiscounts()">Manage Discounts</button>
+    <button mat-button (click)="goToReport()">Sales Report</button>
+    <button mat-button color="warn" (click)="logout()">Logout</button>
+
+  </div>
+</mat-toolbar>
+
+    
+
+
+<mat-card class="summary-card">
+    <mat-card-header>
+      <mat-card-title>Summary</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>Total number of orders: <strong>{{ numOrders }}</strong></p>
+      <p>Total revenue: <strong>{{ revenue | currency }}</strong></p>
+    </mat-card-content>
+  </mat-card>

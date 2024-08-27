@@ -1,0 +1,14 @@
+<mat-toolbar color="primary">
+    <span><h3> ShopForHome Admin Page</h3></span>
+</mat-toolbar>
+<div class="admin">
+    <p>Welcome, Admin. Please select a link below to manage Users and Products.</p>
+</div>
+<div class="button-row">
+<button mat-button color="warn" (click)="logout()">Logout</button>
+<button mat-button (click)="goToUsers()">Manage Users</button>
+<button mat-button (click)="goToProducts()">Manage Products</button>
+<button mat-button (click)="goToDiscounts()">Manage Discounts</button>
+<button mat-button (click)="goToReport()">Sales Report</button>
+
+</div>

@@ -1,0 +1,24 @@
+<mat-card class="signup-card">
+    <mat-card-header>
+      <mat-card-title>ShopForHome - Sign up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+        <mat-form-field appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Enter your username" [(ngModel)]="username" name="username" required>
+        </mat-form-field>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput placeholder="Enter your password" [(ngModel)]="password" name="password" type="password" required>
+        </mat-form-field>
+  
+        
+        <button mat-raised-button color="primary" type="submit">Sign Up</button>
+        <button class="login" mat-raised-button (click)="navigateToLogin()">Back</button>
+      </form>
+      
+    </mat-card-content>
+  </mat-card>
+  
